@@ -9,13 +9,13 @@ import Comments from './components/Comments/Comments';
 import Todos from './components/Todos/Todos';
 
 const App = () => {
-  const dataArr = window.localStorage.getItem("data") || []
-  const initialArg = {dataArr, loading: true};
+  const dataArr = JSON.parse(localStorage.getItem("data") || "[]")
+  const initialArg = {data: dataArr, loading: true};
 
   const [link, setLink] = useState(window.localStorage.getItem("link") || "posts")
   const [state, dispatch] = useReducer(reduser, initialArg);
 
-  
+  // console.log();
 
   useEffect(() => {
       axios
@@ -31,8 +31,9 @@ const App = () => {
           }
           })
         .catch((error) => dispatch(getError()));
-        window.localStorage.setItem("data", state.data)
+        window.localStorage.setItem("data", JSON.stringify(state.data))
   }, [link])
+
 
   function reduser(state, action) {
     switch (action.type){
