@@ -9,7 +9,8 @@ import Comments from './components/Comments/Comments';
 import Todos from './components/Todos/Todos';
 
 const App = () => {
-  const initialArg = {data: [], loading: true};
+  const dataArr = window.localStorage.getItem("data") || []
+  const initialArg = {dataArr, loading: true};
 
   const [link, setLink] = useState(window.localStorage.getItem("link") || "posts")
   const [state, dispatch] = useReducer(reduser, initialArg);
@@ -30,6 +31,7 @@ const App = () => {
           }
           })
         .catch((error) => dispatch(getError()));
+        window.localStorage.setItem("data")
   }, [link])
 
   function reduser(state, action) {
