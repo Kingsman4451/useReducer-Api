@@ -31,7 +31,7 @@ const App = () => {
           }
           })
         .catch((error) => dispatch(getError()));
-        window.localStorage.setItem("data")
+        window.localStorage.setItem("data", state.data)
   }, [link])
 
   function reduser(state, action) {
